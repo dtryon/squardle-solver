@@ -1,0 +1,1 @@
+# squardle-solver
