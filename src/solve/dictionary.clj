@@ -1,6 +1,7 @@
 (ns solver.dictionary
   (:require [clojure.java.io :refer [reader]]
             [clojure.instant :as in]
+            [clojure.set :refer [intersection]]
             [clojure.string :as str]))
 
 
@@ -15,9 +16,10 @@
       rest
       (map #(first (str/split % #",")))
       (map #(str/lower-case %))
-      (filter #(some? (re-matches #"[a-z]+" %)))))
+      (filter #(some? (re-matches #"[a-z]+" %)))
+      (group-by count)))
 
-(defn is-match? [dictionary candidate length]
-  (-> (filter #(= (count %) length) dictionary)
-      (set)
-      (contains? candidate)))
+(defn matches? [dictionary-words candidate-words]
+  (let [dw (set dictionary-words)
+        cw (set candidate-words)]
+    (intersection dw cw)))

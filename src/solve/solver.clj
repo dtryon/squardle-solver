@@ -4,7 +4,7 @@
             [clojure.string :as str]
             [clojure.pprint :refer [pprint]]
             [solver.util :refer [in?]]
-            [solver.dictionary :refer [get-dictionary is-match?]]))
+            [solver.dictionary :refer [get-dictionary matches?]]))
 
 (defn make-grid [size letters]
     (partition size letters))
@@ -78,10 +78,9 @@
         words (get-paths-words grid paths)
         dictionary (get-dictionary)]
     (for [n (range min-length (inc (* size size)))]
-        { n (->> words
-              (filter #(< n (count %)))
+        { n (->> (filter #(<= n (count %)) words) 
               (map #(subs % 0 n))
-              (filter #(is-match? dictionary % n))
+              (matches? (get dictionary n))
               set) })))
 
 (defn squaredle [size letters min-length]
