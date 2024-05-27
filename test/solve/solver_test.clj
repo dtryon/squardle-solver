@@ -75,6 +75,12 @@
     (let [grid (sut/make-grid 3 ["x" "r" "r" "e" "a" "e" "t" "l" "i"])]
       (is (= (count (sut/all-paths grid)) 4224)))))
 
+(deftest test-all-paths4
+  (do
+    (let [grid (sut/make-grid 4 ["b" "o" "t" "h" "w" "h" "i" "f" "e" "r" "d" "n" "t" "l" "a" "g"])]
+      (is (= (count (sut/all-paths grid)) 4441328)))))
+
+
 (deftest test-paths-words
   (do
     (let [grid (sut/make-grid 2 ["a" "d" "i" "e"])
@@ -102,5 +108,13 @@
 (deftest test-squaredle
   (do 
     (is (= (sut/squaredle 4 ["b" "o" "t" "h" "w" "h" "i" "f" "e" "r" "d" "n" "t" "l" "a" "g"] 4) nil))))
+
+(deftest test-squaredle
+  (do 
+    (is (= (sut/squaredle 3 ["c" "c" "r" "a" "i" "l" "b" "d" "e"] 4) nil))))
+
+(deftest test-squaredle
+  (do 
+    (is (= (sut/squaredle 4 ["a" "o" "y" "r" "l" "n" "s" "e" "l" "r" "l" "k" "y" "e" "p" "y"] 4) nil))))
 
 

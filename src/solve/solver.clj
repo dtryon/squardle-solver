@@ -54,8 +54,7 @@
   (let [new-path (conj path point)
         neightbors (get-unused-neighbors point new-path idx-grid)]
     (cond (empty? neightbors) [new-path] 
-          :else (concat all-paths (mapcat #(get-paths % idx-grid new-path all-paths) neightbors)
-                                       ))))
+          :else (concat all-paths (mapcat #(get-paths % idx-grid new-path all-paths) neightbors)))))
 
 (defn get-point-paths [point idx-grid]
   (let [size (count idx-grid)
